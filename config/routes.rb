@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'public/homes#top'
+
   # 顧客用
   # URL /customers/sign_in ...
   # 顧客用
