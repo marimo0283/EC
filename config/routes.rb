@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   namespace :admin do
-    resources :items
+    resources :items, only: [:new, :create, :show, :index, :edit, :update]
+    resources :genres, only: [:create, :index, :edit, :update]
   end
 end
