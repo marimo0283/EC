@@ -3,7 +3,13 @@
   <%= image_tag @item.item_image, size: "290x200" %>
   <p>商品名<%= @item.name %></p>
   <p>商品説明<%= @item.introduction%></p>
-  <p>ジャンル<%#= @item.genre.name %></p>
+  <p>ジャンル<%= @item.genre.name %></p>
   <p>税抜価格<%= @item.price %></p>
+
+  <%= form_with model: @cart_item, local: true do |f| %>
+    <%= f.hidden_field :item_id, value: @item.id %>
+    <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
+    <%= f.submit "カートに入れる", class: "btn btn-success" %>
+  <% end %>
 
 </div>

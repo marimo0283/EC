@@ -1,36 +1,30 @@
 class Public::CartItemsController < ApplicationController
   def index
-    @total_price = my_cart.total_price
-    @items = my_cart.items
+    @cart_items = CartItem.all
   end
 
   def create
-    if my_cart.add_item(product_id: params[:product_id], quantity: params[:quantity])
-      redirect_to cart_items_path
-    else
-      redirect_to cart_items_path
-    end
+    @cart_item = CartItem.new(cart_item_params)
+    @cart_item.item_id = params[:cart_item][:item_id]
+    @cart_item.save
+    redirect_to cart_items_path
   end
 
   def update
-    if my_cart.update_item(product_id: params[:product_id], quantity: params[:quantity])
-      redirect_to cart_items_path
-    else
-      redirect_to cart_items_path
-    end
+
   end
 
   def destroy
-    if my_cart.delete_item(product_id: params[:product_id])
-      redirect_to cart_items_path
-    else
-      redirect_to cart_items_path
-    end
+
+  end
+
+  def destroy_all
+
   end
 
   private
 
-  def my_cart
-    Cart.find(params[:cart_id])
+  def cart_item_params
+      params.require(:cart_item).permit(:item_id, :amount)
   end
 end
