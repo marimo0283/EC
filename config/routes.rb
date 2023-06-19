@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
   scope module: :public do
+    resources :delivery_addresses, only: [:create, :index, :edit, :update, :destroy]
     resources :items, only: [:show, :index]
     resources :cart_items, only: [:create, :index, :update, :destroy]
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
