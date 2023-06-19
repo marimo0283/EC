@@ -9,3 +9,27 @@
 
     <%= f.submit '新規投稿' %>
   <% end %>
+
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @delivery_addresses.each do |delivery_address| %>
+    <tr>
+      <td><%= delivery_address.postal_code %></td>
+      <td><%= delivery_address.address %></td>
+      <td><%= delivery_address.name %></td>
+      <td>
+        <%= link_to "編集する", edit_delivery_address_path(delivery_address.id), :class => "btn btn-success" %>
+        <%= link_to "削除する", delivery_address_path(delivery_address.id), method: :delete, :class => "btn btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
