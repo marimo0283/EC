@@ -16,6 +16,14 @@ class Public::CustomersController < ApplicationController
   def quit
   end
 
+  def out
+    @customer = current_customer
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
+  end
+
   private
 
   def customer_params
