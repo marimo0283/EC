@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  root to: 'public/homes#top'
+  root to: "public/homes#top"
+  get "/about", to: "public/homes#about"
 
   # 顧客用
   # URL /customers/...
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: "public/sessions"
   }
   scope module: :public do
     resources :delivery_addresses, only: [:create, :index, :edit, :update, :destroy]
