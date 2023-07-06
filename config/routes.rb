@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :items, only: [:show, :index]
     resources :cart_items, only: [:create, :index, :update, :destroy]
     delete "/cart_items/destroy_all", to: "cart_items#destroy_all"
+    resources :orders, only: [:new, :create, :index, :show]
+    get "/orders/comfirm", to: "order#/comfirm"
+    get "/orders/complete", to: "orders#complete"
     get "/customers/my_page", to: "customers#show"
     get "/customers/information/edit", to: "customers#edit"
     patch "/customers/information", to: "customers#update"
