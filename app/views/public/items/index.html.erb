@@ -1,9 +1,26 @@
-<% @items.each do |item| %>
-<div>
-  <%= link_to item_path(item.id) do %>
-    <p><%= item.name %></p>
-  <% end %>
-  <p>税抜価格<%= item.price %></p>
-  <p>ジャンル<%= item.genre.name %></p>
-</div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <h3>商品一覧</h3>
+  </div>
+
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="card mb-1">
+        <%= link_to item_path(item) do %>
+          <%= image_tag item.item_image, size: "290x200" %>
+        <% end %>
+        <% if item.is_active == true %>
+          <div class="card-body">
+            <h6 class="card-title"><%= item.name %></h6>
+            <p class="card-text">￥<%= item.with_tax_price.to_s(:delimited) %></p>
+          </div>
+        <% else %>
+          <div class="card-body">
+            <h6 class="card-title"><%= item.name %></h6>
+            <p class="card-text text-danger">販売停止中</p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    </div>
+  </div>
